@@ -48,26 +48,15 @@ class inputFile:
                 for i in range(len(adm_row)):
                     if adm_row[i] == 1:
                         tpm_row[i] = round(1/num_of_ones, 2)
+
         if enable_teleportation:
             for x in range(rows):
                 for y in range(cols):
                     tpm[x][y] = round(tpm[x][y] * (1 - alpha), 2)
                     tpm[x][y] = round(tpm[x][y] + (alpha / self.num_of_pages),2)
+
         self.tpm = tpm
         
-    def calcProbability(self, x, y, graph, alpha):
-        if x not in graph:
-            return 0#alpha
-
-        edges_for_node = graph[x]
-        edges_to_node = 0 #count how many times x points to y.
-        for e in edges_for_node:
-            if e == y:
-                edges_to_node += 1
-        probability = round(edges_to_node / len(edges_for_node), 2)
-        probability = probability * (1-alpha) # add teleportation factor
-        
-        return probability
     
     def calcPageRankVector(self, max_iters, epsilon):
         r = [round(1/self.num_of_pages,2) for i in range(self.num_of_pages)]
