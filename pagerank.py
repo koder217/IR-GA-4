@@ -107,6 +107,9 @@ class inputFile:
 class pagerank:
     input_files = []
     alpha = 0.15
+    def __init__(self, alpha):
+        self.alpha = alpha
+        
     def readInputFiles(self):
         for file in os.listdir("."):
             if file.endswith(".txt"):
@@ -155,11 +158,14 @@ class pagerank:
 	#function to implement pagerank algorithm
 	#input_file - input file that follows the format provided in the assignment description
 	
-pr = pagerank()
+alpha = 0.15
+pr = pagerank(alpha)
 pr.readInputFiles()
 pr.calculateAdjacencyMatrix()
+#pr.printADM()
 pr.calculateProbabilityMatrix(True)
+#pr.printTPM() 
 pr.calculatePageRank(1000, 0.001)
 pr.printPageVector()
-#pr.printADM()
-#pr.printTPM() 
+
+
